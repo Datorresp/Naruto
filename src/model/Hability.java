@@ -9,7 +9,7 @@ package model;
  *
  * @author diegoa.torres
  */
-public class Hability {
+public class Hability implements Comparable<Hability>{
     
     private String name;
     private int power;
@@ -43,4 +43,19 @@ public class Hability {
     public void setSiguiente(Hability next) {
         this.next = next;
     }   
+
+    @Override
+    public int compareTo(Hability o) {
+        return next.compareTo(o);
+    }
+    
+    public int compareToName(Hability h){
+        
+        return name.compareTo(h.getName());
+    }
+    
+    public int compareToPower(Hability o){
+        
+        return power-o.getPower();
+    }
 }

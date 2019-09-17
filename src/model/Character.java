@@ -23,7 +23,7 @@ public class Character {
     private Calendar creation= new GregorianCalendar(year, month, day);
     private Character next;
     private Character back;
-    private Hability primero;
+    private Hability first;
 
     public Character(String name, String personality, int power, Calendar ca) {
         this.name = name;
@@ -88,18 +88,18 @@ public class Character {
         this.back = back;
     }
 
-    public Hability getPrimero() {
-        return primero;
+    public Hability getFirst() {
+        return first;
     }
 
-    public void setPrimero(Hability primero) {
-        this.primero = primero;
+    public void setFirst(Hability first) {
+        this.first = first;
     }
     
-    public String addHabilityToLast(Hability h){
+    public String addHability(Hability h){
         
         String msj =" ";
-        Hability a = primero;
+        Hability a = first;
         
         while (a != null) {
             
@@ -116,5 +116,49 @@ public class Character {
         
         return msj;
     }
-
-}
+    
+    public int habilityLength(){
+        
+        Hability actual = first;        
+        int length = 0;
+        
+        while (actual != null) {
+            
+            actual = actual.getNext();
+        }
+        
+        return length;
+    }
+    
+    
+    public String deleteHability(String namep) throws DoesntExistException{
+        
+        String msj = " ";
+        
+        if (first == null) {
+            
+            throw new DoesntExistException("¡" + namep + " No ha sido aprendida! ");
+            
+        }else if (namep.equals(first.getName())) {
+            
+            first = first.getNext();
+            msj += "¡" + namep + "Ya no pertenece a: " +  name + "!";
+            
+        }       
+        return msj;
+    }
+    
+    public Hability locateHability(String namep){
+        
+        Hability actual = first;
+        
+        while (actual != null && !actual.getName().equals(namep)) {
+            
+            actual = actual.getNext();
+        }
+        
+       return actual;     
+    }
+    
+    
+}   

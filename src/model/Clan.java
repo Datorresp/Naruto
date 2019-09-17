@@ -59,4 +59,19 @@ public class Clan {
         
         return msj;
     }
+    
+    public int lengthCharacter(){
+        
+        Character actual = first;
+        int length = 0;
+        
+        while (actual != null) {
+            
+            length++;
+            actual = actual.getNext();
+        }
+        
+        return length;
+    }
+    
 }
