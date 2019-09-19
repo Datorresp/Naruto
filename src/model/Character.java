@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
  *
  * @author diegoa.torres
  */
-public class Character {
+public class Character implements Comparable<Character>{
     
     private String name, personality;
     private int power;
@@ -159,6 +159,10 @@ public class Character {
         
        return actual;     
     }
-    
-    
+
+    @Override
+    public int compareTo(Character o) {
+     
+        return name.compareTo(o.getName());
+    }       
 }   

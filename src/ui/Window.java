@@ -5,10 +5,16 @@
  */
 package ui;
 
+import java.util.*;
+import model.*;
+
 /**
  *
  * @author diegoa.torres
  */
 public class Window {
+    
+    private Clan first;
+    
     
 }
