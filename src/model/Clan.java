@@ -16,17 +16,17 @@ public class Clan implements Serializable{
     private String name;
     private Clan next;
     private Clan back;
-    private Character first;
+    private Ninja first;
 
     public Clan(String name) {
         this.name = name;
     }
 
-    public Character getFirst() {
+    public Ninja getFirst() {
         return first;
     }
 
-    public void setFirst(Character first) {
+    public void setFirst(Ninja first) {
         this.first = first;
     }
 
@@ -56,10 +56,10 @@ public class Clan implements Serializable{
     
     
     
-    public String addCharacter(Character c) throws AlreadyExistsException{
+    public String addCharacter(Ninja c) throws AlreadyExistsException{
         
         String msj = " ";
-        Character h = first;
+        Ninja h = first;
         
         while (h != null) {
             
@@ -70,6 +70,9 @@ public class Clan implements Serializable{
 
                     h.setNext(h);
                     msj += " ¡Ha entrado un nuevo personaje al clan: " + name + "!";
+                }else{
+                    
+                    h = h.getNext();
                 }
             }else{
                 
@@ -82,7 +85,7 @@ public class Clan implements Serializable{
     
     public int lengthCharacter(){
         
-        Character actual = first;
+        Ninja actual = first;
         int length = 0;
         
         while (actual != null) {
@@ -94,9 +97,9 @@ public class Clan implements Serializable{
         return length;
     }
     
-    public Character locateCharacter(String namec) throws DoesntExistException{
+    public Ninja locateCharacter(String namec) throws DoesntExistException{
         
-        Character actual = first;
+        Ninja actual = first;
         
         while (actual!= null && !actual.getName().equals(namec)) {
             
@@ -110,10 +113,10 @@ public class Clan implements Serializable{
         return actual;
     }
     
-    public Character locatePrevious(String namec){
+    public Ninja locatePrevious(String namec){
         
-        Character lasst = null;
-        Character actual = first;
+        Ninja lasst = null;
+        Ninja actual = first;
         
         while (actual != null && !actual.getName().equals(namec)) {
             
@@ -124,9 +127,9 @@ public class Clan implements Serializable{
         return actual != null ? lasst: null;
     }
     
-    public Character locateLast(){
+    public Ninja locateLast(){
         
-     Character actual = first;
+     Ninja actual = first;
      
         if (actual != null) {
             
@@ -153,20 +156,43 @@ public class Clan implements Serializable{
             msj += " !Se ha expulsado a: " + namec + " de la aldea¡";
         }else{
          
-            Character lasst = locatePrevious(namec);
+            Ninja lasst = locatePrevious(namec);
             
             if (lasst == null) {
                 
                 throw new DoesntExistException("!" + namec + " Ya no pertenece a esta aldea ¡");
             }
-        }
+         }
         
         return msj;
     }
     
+    public void addHability(String namec, Hability c) throws DoesntExistException{
+        
+        Ninja ch = first;
+        
+        while (ch != null) {
+            
+            if (ch.getName().equals(namec)) {
+               
+                ch.addHability(c);
+                
+            }else{
+                
+                ch = ch.getNext();
+                
+            }
+            
+        }if (ch == null) {
+            
+            throw  new DoesntExistException("¡ El ninja se ha ido !");
+            
+        }
+    }
+    
     public void characterSortByName(){
         
-        Character actual = first.getNext();
+        Ninja actual = first.getNext();
         
         while (actual.compareTo(actual.getBack()) < 0) {
             
