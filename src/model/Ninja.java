@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -12,7 +13,7 @@ import java.util.GregorianCalendar;
  *
  * @author diegoa.torres
  */
-public class Ninja implements Comparable<Ninja>{
+public class Ninja implements Comparable<Ninja>, Serializable{
     
     private String name, personality;
     private int power;
@@ -24,12 +25,16 @@ public class Ninja implements Comparable<Ninja>{
     private Ninja next;
     private Ninja back;
     private Hability first;
+    private static final long serialVersionUID = 8799656478674716639L;
 
-    public Ninja(String name, String personality, int power, Calendar ca) {
+    public Ninja(String name, String personality, int power, Calendar ca, Ninja next, Ninja back, Hability first) {
         this.name = name;
         this.personality = personality;
         this.power = power;
         this.ca = ca;
+        this.next = next;
+        this.back = back;
+        this.first = first;
     }
 
     public String getName() {

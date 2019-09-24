@@ -14,12 +14,12 @@ import java.io.Serializable;
 public class Clan implements Serializable{
    
     private String name;
-    private Clan next;
-    private Clan back;
     private Ninja first;
+    private static final long serialVersionUID = 8799656478674716638L;
 
-    public Clan(String name) {
+    public Clan(String name, Ninja first) {
         this.name = name;
+        this.first = first;
     }
 
     public Ninja getFirst() {
@@ -36,30 +36,13 @@ public class Clan implements Serializable{
 
     public void setName(String name) {
         this.name = name;
-    }  
-
-    public Clan getNext() {
-        return next;
-    }
-
-    public void setNext(Clan next) {
-        this.next = next;
-    }
-
-    public Clan getBack() {
-        return back;
-    }
-
-    public void setBack(Clan back) {
-        this.back = back;
-    }
-    
-    
+    } 
     
     public String addCharacter(Ninja c) throws AlreadyExistsException{
         
         String msj = " ";
         Ninja h = first;
+        System.out.println("Prueba");
         
         while (h != null) {
             
@@ -70,6 +53,7 @@ public class Clan implements Serializable{
 
                     h.setNext(h);
                     msj += " ¡Ha entrado un nuevo personaje al clan: " + name + "!";
+                    System.out.println("PRUEBAAAAAAAAAAAAAAA");
                 }else{
                     
                     h = h.getNext();
@@ -205,6 +189,7 @@ public class Clan implements Serializable{
            msj += actual.toString();
            msj += '\n';
            actual = actual.getNext();
+           
        }
        
        return msj;
@@ -222,11 +207,13 @@ public class Clan implements Serializable{
        Ninja actual = first;
        String msj = " ";
        
+       
        while (actual != null) {
            
            msj += actual.toString() + "----------------" + actual.HabilityInfo();
            msj += '\n';
            actual = actual.getNext();
+           
        }
        
        return msj;

@@ -5,19 +5,23 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author diegoa.torres
  */
-public class Hability implements Comparable<Hability>{
+public class Hability implements Comparable<Hability>, Serializable{
     
     private String name;
     private int power;
     private Hability next;
+    private static final long serialVersionUID = 799656478674716638L;
 
-    public Hability(String name, int power) {
+    public Hability(String name, int power, Hability next) {
         this.name = name;
         this.power = power;
+        this.next = next;
     }
 
     public String getName() {
