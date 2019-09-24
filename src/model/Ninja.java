@@ -84,7 +84,7 @@ public class Ninja implements Comparable<Ninja>{
         return back;
     }
 
-    public void setC1(Ninja back) {
+    public void setBack(Ninja back) {
         this.back = back;
     }
 
@@ -148,13 +148,17 @@ public class Ninja implements Comparable<Ninja>{
         return msj;
     }
     
-    public Hability locateHability(String namep){
+    public Hability locateHability(String namep) throws DoesntExistException{
         
         Hability actual = first;
         
         while (actual != null && !actual.getName().equals(namep)) {
             
             actual = actual.getNext();
+            
+        }if (actual == null) {
+            
+            throw new DoesntExistException("¡ El Personaje no exite en esta aldea !");
         }
         
        return actual;     
@@ -164,5 +168,54 @@ public class Ninja implements Comparable<Ninja>{
     public int compareTo(Ninja o) {
      
         return name.compareTo(o.getName());
-    }        
+    }
+    
+    public Hability locatePrevious(String namec) throws DoesntExistException{
+        
+        Hability lasst = null;
+        Hability actual = first;
+        
+        while (actual != null && !actual.getName().equals(namec)) {
+            
+          lasst = actual;
+          actual = actual.getNext();
+        }if (actual == null) {
+            
+            throw new DoesntExistException("¡ El Personaje no exite en esta aldea !");
+        }
+   
+        return actual != null ? lasst: null;
+    }    
+
+    @Override
+    public String toString() {
+        return "Ninja{" + "name=" + name + ", personality=" + personality + ", power=" + power + ", ca=" + ca + ", creation=" + creation + '}';
+    }
+    
+    public String HabilityInfo(){
+        
+        String msj = " ";
+        Hability actual = first;
+        
+        while (actual != null) {
+            
+            msj += actual.toString();
+            actual = actual.getNext();
+        }
+        
+        return msj;
+    }
+    
+    public void updateHability(String name, Hability h) throws DoesntExistException{
+        
+        Hability last = locatePrevious(name);
+        Hability actual = locateHability(name);
+        last.setSiguiente(h);
+        
+        if (actual.getNext() != null) {
+            
+            actual.setSiguiente(actual.getNext());
+            
+        }                
+    }
 }   

@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -57,5 +57,10 @@ public class Hability implements Comparable<Hability>{
     public int compareToPower(Hability o){
         
         return power-o.getPower();
+    }
+
+    @Override
+    public String toString() {
+        return "Hability{" + "name=" + name + ", power=" + power + '}';
     }
 }

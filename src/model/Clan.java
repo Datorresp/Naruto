@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author diegoa.torres
  */
 public class Clan implements Serializable{
-    
+   
     private String name;
     private Clan next;
     private Clan back;
@@ -169,35 +169,66 @@ public class Clan implements Serializable{
     
     public void addHability(String namec, Hability c) throws DoesntExistException{
         
-        Ninja ch = first;
+        Ninja actual = locateCharacter(namec);
         
-        while (ch != null) {
-            
-            if (ch.getName().equals(namec)) {
-               
-                ch.addHability(c);
-                
-            }else{
-                
-                ch = ch.getNext();
-                
-            }
-            
-        }if (ch == null) {
-            
-            throw  new DoesntExistException("¡ El ninja se ha ido !");
-            
-        }
+        actual.addHability(c);
+
     }
     
-    public void characterSortByName(){
+    public void updateNinjaByName(String name, Ninja n) throws DoesntExistException{
         
-        Ninja actual = first.getNext();
+        Ninja last = locatePrevious(name);
+        Ninja actual = locateCharacter(name);
+        last.setNext(n);
+        actual.setBack(last);
         
-        while (actual.compareTo(actual.getBack()) < 0) {
+        if (actual.getNext() != null) {
             
-            first = actual.getBack();
+            actual.setNext(actual.getNext());
             
-        }
+        }        
     }
+    
+    public void delateHability(String nameN, String nameH) throws DoesntExistException{
+        
+        Ninja actual = locateCharacter(nameN);
+        actual.deleteHability(nameH);       
+    }
+    
+   public String showInfoNinja(){
+       
+       Ninja actual = first;
+       String msj = " "; 
+       
+       while (actual != null) {
+           
+           msj += actual.toString();
+           msj += '\n';
+           actual = actual.getNext();
+       }
+       
+       return msj;
+   }
+   
+   public void updateHability(String nameN, String nameH, Hability h) throws DoesntExistException{
+    
+       Ninja actual = locateCharacter(nameN);
+       
+       actual.updateHability(nameH, h);
+   }
+   
+   public String ShowInfoHability(){
+       
+       Ninja actual = first;
+       String msj = " ";
+       
+       while (actual != null) {
+           
+           msj += actual.toString() + "----------------" + actual.HabilityInfo();
+           msj += '\n';
+           actual = actual.getNext();
+       }
+       
+       return msj;
+   }
 }
