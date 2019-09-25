@@ -223,4 +223,25 @@ public class Ninja implements Comparable<Ninja>, Serializable{
             
         }                
     }
+    
+    public void sortHability(){
+        
+       Hability actual = first;
+       Hability next = actual.getNext();
+       Hability aux = null;
+       
+       while (actual != null && next != null) {
+           
+           if (actual.compareTo(next) > 0) {
+               
+               aux = actual;
+               first = next;
+               next.setSiguiente(actual);
+           }else{
+               
+               actual = actual.getNext();
+               next = next.getNext();
+           }
+       }        
+    }
 }   

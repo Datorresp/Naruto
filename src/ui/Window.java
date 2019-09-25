@@ -131,6 +131,12 @@ public class Window {
                     
                     break;
                     
+                case 10:
+                    
+                    sortNinjas();
+                    
+                    break;
+                    
                 default:
                     
                     salir = true;
@@ -150,6 +156,7 @@ public class Window {
         System.out.println("7. Editar una habilidad ");
         System.out.println("8. Mostrar Ninjas del clan ");
         System.out.println("9. Mostrar Habilidades con el ninja respectivo");
+        System.out.println("10. Mostrar ninjas organizados");
         System.out.println(". Salir ");
 
         int valor = reader.nextInt();
@@ -581,6 +588,45 @@ public class Window {
         }
         
         return h;
+    }
+    
+    private void sortClan(){
+        
+        for (int i = 1; i < c.size(); i++) {
+            
+            int j = i;
+            
+            while (j>0 && c.get(j).compareTo(c.get(j-1))<0) {
+                
+                Clan tmp = c.get(j);
+                c.set(j, c.get(j-1));
+                c.set(j-1, tmp);
+                j--;
+            }
+            
+        }
+    }
+    
+    private void sortNinjas() throws DoesntExistException{
+        
+        
+        
+        try {
+            
+            int i = initClan();
+            
+            c.get(i).sortNinjas();
+            c.get(i).ShowInfoHability();
+            
+        } catch (NullPointerException e) {
+            
+            System.out.println("Verifique que hayan ninjas creados");
+            reader.nextLine();
+        }catch (DoesntExistException ex) {
+            
+            System.out.println("Verifique que el clan exista");
+            reader.nextLine();
+        }
     }
 
     private void init() {

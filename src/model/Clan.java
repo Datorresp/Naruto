@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author diegoa.torres
  */
-public class Clan implements Serializable{
+public class Clan implements Serializable, Comparable<Clan>{
    
     private String name;
     private Ninja first;
@@ -218,4 +218,73 @@ public class Clan implements Serializable{
        
        return msj;
    }
+   
+   public void sortNinjas(){
+
+
+        boolean s;
+
+        do {
+            
+            Ninja aux = first;
+            
+            Ninja aux1 = null;
+            
+            Ninja next = first.getNext();
+            
+             s = false;
+
+            while(next != null) {
+            
+                if(aux.compareTo(next) > 0) {
+                
+                    s = true;
+                    
+                    if(aux1 != null) {
+                    
+                        Ninja next1 = next.getNext();
+                        
+                        aux1.setNext(next);
+                        
+                        next.setNext(aux1);
+                        
+                        next.setNext(aux);
+                        
+                        aux.setBack(next);
+                        
+                        aux.setNext(next1);
+ 
+                    }else {
+                    
+                        Ninja next2 = next.getNext();
+                        
+                        first = next;
+                        
+                        next.setNext(aux);
+                        
+                        aux.setNext(next);
+                        
+                        aux.setNext(next2);
+                        
+                        next2.setBack(aux);
+                        
+                    }
+                    aux1 = next;
+                    next = aux.getNext().getNext();
+                    }else {
+                        aux1 = aux;
+                        aux = next;
+                        next = next.getNext();              
+                }               
+            }
+            
+        }while(s);
+	
+   }
+
+    @Override
+    public int compareTo(Clan o) {
+        
+        return name.compareTo(o.getName());
+    }
 }
